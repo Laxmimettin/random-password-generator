@@ -1,0 +1,497 @@
+:root {
+    --bg: #07090e;
+    --surface: rgba(15, 23, 42, 0.75);
+    --surface-border: rgba(255, 255, 255, 0.08);
+    --surface-hover: rgba(255, 255, 255, 0.04);
+
+    --primary: #06b6d4;
+    --primary-glow: rgba(6, 182, 212, 0.35);
+    --accent: #10b981;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --color-weak: #ef4444;
+    --color-medium: #f59e0b;
+    --color-strong: #06b6d4;
+    --color-very-strong: #10b981;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Ambient Radial Glows */
+.ambient-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.glow-1 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, #06b6d4, transparent 70%);
+    top: -100px;
+    left: -80px;
+}
+
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #8b5cf6, transparent 70%);
+    bottom: -150px;
+    right: -100px;
+}
+
+/* Container Glass Card */
+.app-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 540px;
+    background: var(--surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.2));
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.brand h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.brand p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--surface-border);
+    color: var(--text-muted);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Password Display Area */
+.display-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(2, 6, 23, 0.85);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    transition: border-color 0.2s ease;
+}
+
+.display-container:focus-within {
+    border-color: var(--primary);
+}
+
+.password-box {
+    flex: 1;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.password-text {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+    user-select: all;
+}
+
+/* Syntax Highlighting */
+.char-upper {
+    color: #38bdf8;
+}
+
+.char-lower {
+    color: #f1f5f9;
+}
+
+.char-num {
+    color: #34d399;
+}
+
+.char-sym {
+    color: #f472b6;
+}
+
+.display-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--surface-border);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn.icon-only {
+    padding: 8px;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.action-btn.copied {
+    background: var(--accent);
+    color: #020617;
+    border-color: var(--accent);
+}
+
+/* Strength & Entropy Meter */
+.strength-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.strength-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.strength-header .label {
+    color: var(--text-muted);
+}
+
+.strength-status {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.strength-bar-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    height: 6px;
+}
+
+.meter-segment {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.strength-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'Fira Code', monospace;
+}
+
+/* Controls */
+.controls-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.length-badge input {
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid var(--surface-border);
+    color: var(--primary);
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 55px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary-glow);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+/* Presets */
+.presets-row {
+    display: flex;
+    gap: 8px;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--surface-border);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
+
+.chip.active {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Checkbox Toggle Grid */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--surface-border);
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-option.full-width {
+    grid-column: span 2;
+}
+
+.toggle-option:hover {
+    background: var(--surface-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.toggle-option input[type="checkbox"] {
+    display: none;
+}
+
+.custom-toggle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--surface-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.toggle-option input[type="checkbox"]:checked+.custom-toggle {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.toggle-option input[type="checkbox"]:checked+.custom-toggle::after {
+    content: '✓';
+    color: #020617;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.option-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.option-label strong {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.option-label small {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* Main Generate Button */
+.generate-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+    color: #020617;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, filter 0.2s ease;
+    box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4);
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.generate-btn:active {
+    transform: translateY(0);
+}
+
+/* Toast */
+.toast {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(16, 185, 129, 0.95);
+    color: #020617;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.toast.hidden {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+}
+
+@media (max-width: 520px) {
+    .app-card {
+        padding: 20px;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toggle-option.full-width {
+        grid-column: span 1;
+    }
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CipherGuard — Secure Password Generator</title>
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <main class="app-card">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <h1>CipherGuard</h1>
+                    <p>Cryptographically Secure Key Generator</p>
+                </div>
+            </div>
+            <button id="themeToggle" class="icon-btn" title="Toggle Mode">
+                <i data-lucide="sparkles"></i>
+            </button>
+        </header>
+
+        <!-- Password Display Screen -->
+        <section class="display-container">
+            <div class="password-box" id="passwordBox">
+                <div class="password-text" id="passwordOutput">Click Generate</div>
+            </div>
+            <div class="display-actions">
+                <button id="copyBtn" class="action-btn" title="Copy to clipboard">
+                    <i data-lucide="copy" id="copyIcon"></i>
+                    <span id="copyText">Copy</span>
+                </button>
+                <button id="refreshBtn" class="action-btn icon-only" title="Generate New">
+                    <i data-lucide="refresh-cw" id="refreshIcon"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Strength & Entropy Meter -->
+        <section class="strength-card">
+            <div class="strength-header">
+                <span class="label">Security Level</span>
+                <span class="strength-status" id="strengthStatus">Evaluating...</span>
+            </div>
+            <div class="strength-bar-track">
+                <div class="meter-segment" id="seg-1"></div>
+                <div class="meter-segment" id="seg-2"></div>
+                <div class="meter-segment" id="seg-3"></div>
+                <div class="meter-segment" id="seg-4"></div>
+            </div>
+            <div class="strength-meta">
+                <span id="entropyText">Entropy: 0 bits</span>
+                <span id="crackEstimate">Crack time: instant</span>
+            </div>
+        </section>
+
+        <!-- Generator Controls -->
+        <section class="controls-card">
+            <!-- Length Setting -->
+            <div class="control-row">
+                <div class="slider-header">
+                    <label for="lengthSlider">Character Length</label>
+                    <div class="length-badge">
+                        <input type="number" id="lengthInput" min="6" max="64" value="16" />
+                    </div>
+                </div>
+                <input type="range" id="lengthSlider" min="6" max="64" value="16" class="slider" />
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="presets-row">
+                <button class="chip active" data-preset="all">Full Arsenal</button>
+                <button class="chip" data-preset="easy">Easy to Read</button>
+                <button class="chip" data-preset="pin">Numeric PIN</button>
+            </div>
+
+            <!-- Character Type Checkboxes -->
+            <div class="checkbox-grid">
+                <label class="toggle-option">
+                    <input type="checkbox" id="chkUpper" checked />
+                    <span class="custom-toggle"></span>
+                    <span class="option-label">
+                        <strong>Uppercase Letters</strong>
+                        <small>A, B, C, D...</small>
+                    </span>
+                </label>
+
+                <label class="toggle-option">
+                    <input type="checkbox" id="chkLower" checked />
+                    <span class="custom-toggle"></span>
+                    <span class="option-label">
+                        <strong>Lowercase Letters</strong>
+                        <small>a, b, c, d...</small>
+                    </span>
+                </label>
+
+                <label class="toggle-option">
+                    <input type="checkbox" id="chkNumbers" checked />
+                    <span class="custom-toggle"></span>
+                    <span class="option-label">
+                        <strong>Numeric Digits</strong>
+                        <small>0, 1, 2, 3...</small>
+                    </span>
+                </label>
+
+                <label class="toggle-option">
+                    <input type="checkbox" id="chkSymbols" checked />
+                    <span class="custom-toggle"></span>
+                    <span class="option-label">
+                        <strong>Special Symbols</strong>
+                        <small>!, @, #, $, %...</small>
+                    </span>
+                </label>
+
+                <label class="toggle-option full-width">
+                    <input type="checkbox" id="chkExcludeAmbiguous" />
+                    <span class="custom-toggle"></span>
+                    <span class="option-label">
+                        <strong>Exclude Ambiguous Characters</strong>
+                        <small>Omit confusing glyphs (e.g. 0, O, l, 1, I)</small>
+                    </span>
+                </label>
+            </div>
+
+            <!-- Generate Button -->
+            <button id="generateBtn" class="generate-btn">
+                <i data-lucide="zap"></i>
+                <span>Generate Secure Key</span>
+            </button>
+        </section>
+
+        <!-- Notification Toast -->
+        <div id="toast" class="toast hidden">
+            <i data-lucide="check-circle-2"></i>
+            <span>Copied to clipboard!</span>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
